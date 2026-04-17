@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHG – Hotel Blacklist & Market Segmentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #B8974B;
+      --gold-light: #D4B26A;
+      --gold-deep: #8A6E30;
+      --ink: #1A1614;
+      --sand: #F7F3ED;
+      --sand-deep: #E5D9CE;
+      --white: #FDFAF7;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Jost', sans-serif;
+      --nav-h: 72px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--sand); line-height: 1.6; padding-top: var(--nav-h); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); z-index: 1000; border-bottom: 1px solid rgba(184,151,75,0.15); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; text-decoration: none; }
+    .nav-logo-mark img { width: 16px; height: auto; filter: brightness(0) invert(1); }
+    .nav-logo-text em { font-style: italic; color: var(--gold-light); }
+    .nav-menu { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-link { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.6); padding: 8px 16px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-light); }
+    .nav-logout { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.5); padding: 8px 16px; border: 1px solid rgba(184,151,75,0.3); margin-left: 8px; background: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .nav-logout:hover { color: var(--gold); border-color: var(--gold); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 18px; cursor: pointer; }
+    @media (max-width: 1100px) {
+      .nav-toggle { display: block; }
+      .nav-menu { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--ink); flex-direction: column; padding: 16px 0; gap: 0; }
+      .nav-menu.open { display: flex; }
+      .nav-link { padding: 12px 24px; width: 100%; }
+      .nav-logout { margin: 8px 24px; width: calc(100% - 48px); justify-content: center; }
+      .nav-inner { padding: 0 24px; }
+    }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('logo/Background-Blacklist-Atas.jpeg') center/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 0.8s ease; }
+    .ornament-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
+    .ornament-row .ornament-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .page-hero-eyebrow { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .page-hero-title { font-size: clamp(48px, 6vw, 72px); color: var(--white); font-weight: 500; }
+    .page-hero-title em { color: var(--gold-light); font-style: italic; }
+
+    /* CONTAINER */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 60px; }
+    @media (max-width: 1024px) { .container { padding: 0 40px; } }
+    @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+    /* PAGE MAIN */
+    .page-main { background: var(--sand); }
+    .page-main .container { padding-top: 70px; padding-bottom: 80px; }
+
+    /* SECTION STYLES */
+    .section-card { background: var(--white); padding: 40px 48px; margin-bottom: 48px; border-left: 6px solid var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .section-card h2 { font-size: 32px; font-family: var(--font-serif); color: var(--ink); margin-bottom: 28px; font-weight: 600; }
+    .section-card h2 i { color: var(--gold); margin-right: 12px; }
+    .section-card p { font-size: 18px; color: var(--ink); margin-bottom: 24px; line-height: 1.7; text-align: justify; }
+
+    .bullet-list { list-style: none; margin: 20px 0; }
+    .bullet-list li { padding: 8px 0; padding-left: 24px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.5; text-align: justify; }
+    .bullet-list li:before { content: "•"; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+    .segment-list { list-style: none; margin: 20px 0; }
+    .segment-list li { padding: 12px 0; padding-left: 24px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.5; text-align: justify; border-bottom: 1px solid var(--sand-deep); }
+    .segment-list li:before { content: "•"; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+    .example-text { color: var(--ink); font-style: italic; margin-top: 6px; display: block; }
+
+    /* IMAGE GALLERY */
+    .image-gallery { display: flex; gap: 20px; flex-wrap: wrap; margin: 16px 0 24px 0; }
+    .clickable-img { width: 200px; height: auto; cursor: pointer; border-radius: 4px; border: 1px solid var(--sand-deep); transition: transform 0.2s; }
+    .clickable-img:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+    /* MODAL ZOOM */
+    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); cursor: pointer; }
+    .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .close-modal { position: absolute; top: 20px; right: 35px; color: var(--gold-light); font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
+    .close-modal:hover { color: var(--white); }
+
+    /* FOOTER */
+    .footer { background: var(--ink); padding: 60px 0 40px; border-top: 1px solid rgba(184,151,75,0.15); }
+    .footer-inner { text-align: center; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon img { width: 18px; height: auto; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); }
+    .footer-logo-text em { color: var(--gold-light); }
+    .footer-property { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-note { font-size: 11px; color: rgba(253,250,247,0.3); margin-bottom: 8px; }
+    .footer-copy { font-size: 11px; color: rgba(253,250,247,0.25); }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 28px; }
+      .section-card h2 { font-size: 26px; }
+      .bullet-list li, .segment-list li { font-size: 15px; }
+      .section-card p { font-size: 16px; }
+      .clickable-img { width: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    function checkAuth() { const session = localStorage.getItem('chg_auth_session'); if (!session) window.location.replace('index.html'); }
+    function handleLogout() { localStorage.removeItem('chg_auth_session'); window.location.replace('index.html'); }
+    function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+    checkAuth();
+
+    function openModal(imgSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = 'block';
+      modalImg.src = imgSrc;
+    }
+    function closeModal() { document.getElementById('imageModal').style.display = 'none'; }
+  </script>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="home.html" class="nav-logo"><span class="nav-logo-mark"><img src="logo/bintang-capella.png" alt="star"></span><span class="nav-logo-text">CHG <em>Reservations</em></span></a>
+      <button class="nav-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mission.html" class="nav-link"><i class="fa-solid fa-star"></i> Mission</a></li>
+        <li><a href="data-entry.html" class="nav-link"><i class="fa-solid fa-database"></i> Data Entry</a></li>
+        <li><a href="vip.html" class="nav-link"><i class="fa-solid fa-crown"></i> VIP Code</a></li>
+        <li><a href="blacklist.html" class="nav-link active"><i class="fa-solid fa-ban"></i> Blacklist</a></li>
+        <li><a href="aspire.html" class="nav-link"><i class="fa-solid fa-phone"></i> Aspire</a></li>
+        <li><a href="revenue.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Revenue</a></li>
+        <li><button class="nav-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Modal for Image Zoom -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="ornament-row">
+        <div class="ornament-line"></div>
+        <img src="logo/bintang-capella.png" alt="star" style="width: 24px; height: auto; filter: brightness(0) invert(1);">
+        <div class="ornament-line"></div>
+      </div>
+      <p class="page-hero-eyebrow">Security & Revenue Management</p>
+      <h1 class="page-hero-title">Hotel <em>Blacklist</em> & <em>Market</em> Segmentation</h1>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+
+      <!-- ==================== HOTEL BLACKLIST SECTION ==================== -->
+      
+      <div class="section-card">
+        <h2><i class="fa-solid fa-circle-info"></i> Definition</h2>
+        <p>A 'Blacklist' refers to a list of guests who have engaged in unacceptable or unethical behaviour and/or activities at the hotel. There must be a reasonable and non-arbitrary reason for the guest to be placed on Blacklist. The property's General Manager must endorse the Blacklisted Guest and highlight the profile to Corporate Office within 24 hours.</p>
+        <p>Once a guest has been placed on Blacklist, they will automatically be blacklisted from all hotels and resorts managed by Capella Hotel Group (CHG). All properties under CHG reserve the rights to not accommodate check-in and/or any service requests of the aforementioned.</p>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Conditions for Blacklist</h2>
+        <p>A Guest can be placed on the hotel's blacklist based on the following condition:</p>
+        <ul class="bullet-list">
+          <li>Engaged in fraudulence</li>
+          <li>Performed verbal abuse and/or threatened Colleagues/Teammates</li>
+          <li>Assaulted / physically abused Colleagues/Teammates and/or other guests</li>
+          <li>Caused problems and/or significant property damages</li>
+          <li>Engaged in illegal behaviour within the hotel's premise</li>
+          <li>Sexual harassment towards Colleagues/Teammates and/or other guests</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-ban"></i> Banned Actions</h2>
+        <p>Profiles on this list are banned from:</p>
+        <ul class="bullet-list">
+          <li>Making a room reservation and checking-in to the hotel/resort</li>
+          <li>Making a dining reservation at all food and beverage outlets within the hotel</li>
+          <li>Making a booking or utilizing any hotel facilities, amenities and services</li>
+        </ul>
+        <p><em>If the property decides to remove the guest from Blacklist, the General Manager must notify the Senior Vice President of Operations prior to proceeding with the necessary action to update the guest's profile. No guest may be removed from blacklist without written endorsement from both the property GM and SVP Operations. Corporate Office must update Salesforce and OPERA records accordingly.</em></p>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-lock"></i> Confidentiality & Record Keeping</h2>
+        <ul class="bullet-list">
+          <li>All blacklist records must be handled confidentially and used strictly for operational purposes.</li>
+          <li>Access to blacklisted profiles is restricted to authorized users only.</li>
+          <li>Supporting documentation such as CCTV footage, colleague statements, or incident reports must be retained for a minimum of 3 years (or longer, based on local regulations).</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-hotel"></i> Steps to Placing an in-house Guest on Blacklist</h2>
+        <ul class="bullet-list">
+          <li>Inform your manager when the guest misbehaved.</li>
+          <li>Should the guest not cooperate, inform Security to escort them to a quiet area/seat.</li>
+          <li>Notify the General Manager and the General Manager must meet the guest to explain the reason for the blacklist.</li>
+          <li>General Manager to send a formal email communication to the guest, stating their discussion.</li>
+          <li>In the event where guest is intoxicated, inform Security, escort the guest back to their room and have the General Manager to meet the guest the following day.</li>
+          <li>Raise a Glitch on Knowcross, under glitch description state the reason for the blacklist.</li>
+          <li>Update the VIP Level of Guest Profile on OPERA PMS to 'VIP 6 - Blacklist'</li>
+          <li>Update Background Notes on the top line with the following: BLACKLISTED PROFILE BY [PROPERTY NAME] ENDORSED BY [NAME OF GM]</li>
+          <li>Upload a photo of the guest in their Salesforce "Hapi Guest Focus" Profile</li>
+          <li>Ensure a formal Incident Report is logged, endorsed by Security, and attached to the guest record.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-city"></i> Steps to Placing a City Guest (Visitor) on Blacklist</h2>
+        <ul class="bullet-list">
+          <li>Inform your manager when the guest misbehaved.</li>
+          <li>Politely explain that you are unable serve them in due to their ill conduct.</li>
+          <li>Should the guest not cooperate, inform Security to escort them to a quiet area/seat.</li>
+          <li>Notify the General Manager and the General Manager must meet the guest to explain the reason for the blacklist.</li>
+          <li>General Manager to send a formal email communication to the guest, stating their discussion</li>
+          <li>In the event where guest is intoxicated, inform Security, escort the guest out of the hotel/resort premise.</li>
+          <li>Raise a Visitor Glitch on Knowcross, under glitch description state the reason for the blacklist.</li>
+          <li>Create a Guest Profile on OPERA PMS and input VIP level as 'VIP 6 - Blacklist'.</li>
+          <li>Update Background Notes on the top line with the following: BLACKLISTED PROFILE BY [PROPERTY NAME] ENDORSED BY [NAME OF GM]</li>
+          <li>Ensure a formal Incident Report is logged, endorsed by Security, and attached to the visitor profile.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-door-closed"></i> Steps to Refusing a Blacklisted Guest from Checking-in</h2>
+        <ul class="bullet-list">
+          <li>Upon guest's attempt to check-in, validate their personal identification and details against the reservation profile in OPERA</li>
+          <li>Do a profile look-up on Salesforce "Hapi Guest Focus", under the 'Search Tab' search "VIP6" to ascertain guest's identification.</li>
+          <li>Inform your manager</li>
+          <li>Politely explained to the guest that you are unable to check them in due to previous incident</li>
+          <li>Should the guest not cooperate, inform Security. If guest becomes aggressive or physically threatening, Security must escalate to local authorities/police immediately.</li>
+          <li>Update the following information under OPERA Background Note on the second line: [Date (DD-MMM-YYYY), Time (HH:MM hrs): Guest attempted to check-in at [Property Name]]</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-shield-halved"></i> Escalation & Safety</h2>
+        <ul class="bullet-list">
+          <li>If medical condition or mental health concerns are suspected, Security must prioritize guest's safety and involve local authorities if required.</li>
+          <li>Intoxicated guests must be managed discreetly, ensuring no risk to themselves, colleagues, or other guests.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2><i class="fa-solid fa-building"></i> Corporate Office Role & Group-Wide Consistency</h2>
+        <ul class="bullet-list">
+          <li>Once a guest is blacklisted, Corporate Office will circulate the record to all CHG properties to ensure consistent enforcement across all hotels.</li>
+          <li>Properties must not override or bypass blacklist restrictions.</li>
+        </ul>
+      </div>
+
+      <!-- CHG GUEST BLACKLIST WITH IMAGES -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-list"></i> CHG GUEST BLACKLIST</h2>
+
+        <!-- 1. Pachara Niljiaskul -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">1. Pachara Niljiaskul (also known as Photsathorn Jirawatanaphokin)</h3>
+          <p>AKA "the romance scammer" in local news coverage. Fraudulent activity using credit cards of women he preyed upon.</p>
+          <div class="image-gallery">
+            <img src="logo/Picture1.jpg" class="clickable-img" alt="Pachara 1" onclick="openModal(this.src)">
+            <img src="logo/Picture2.jpg" class="clickable-img" alt="Pachara 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 2. Moritz Pfoh -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">2. Moritz Pfoh</h3>
+          <p>A bipolar guest who trashed the room and threw beer cans at the pool staff from his balcony.</p>
+          <div class="image-gallery">
+            <img src="logo/Picture3.jpg" class="clickable-img" alt="Moritz 1" onclick="openModal(this.src)">
+            <img src="logo/Picture4.jpg" class="clickable-img" alt="Moritz 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 3. Jirabhadr Jaturavith -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">3. Jirabhadr Jaturavith (also known as Jet Jaturavith)</h3>
+          <p>Ex-FSPR resident. Longstanding unpaid balance.</p>
+          <div class="image-gallery">
+            <img src="logo/Picture5.jpg" class="clickable-img" alt="Jirabhadr 1" onclick="openModal(this.src)">
+            <img src="logo/Picture6.jpg" class="clickable-img" alt="Jirabhadr 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 4. Trung Duc Pham -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">4. Trung Duc Pham</h3>
+          <p>Guest did not pay bill after staying in villa.</p>
+          <a href="https://www.linkedin.com/in/ducpht/" target="_blank" style="color: var(--gold); text-decoration: none; display: inline-block; margin-bottom: 12px;"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+          <div class="image-gallery">
+            <img src="logo/Picture7.jpg" class="clickable-img" alt="Trung Duc 1" onclick="openModal(this.src)">
+            <img src="logo/Picture8.jpg" class="clickable-img" alt="Trung Duc 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 5. Mr Adrian Aranda -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">5. Mr Adrian Aranda</h3>
+          <p>Unsettled Account, Total charges unpaid: SGD$11,728.8</p>
+          <div class="image-gallery">
+            <img src="logo/Picture9.jpg" class="clickable-img" alt="Adrian Aranda 1" onclick="openModal(this.src)">
+            <img src="logo/Picture10.jpg" class="clickable-img" alt="Adrian Aranda 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 6. Andy Hoon Shim -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">6. Andy Hoon Shim</h3>
+          <div class="image-gallery">
+            <img src="logo/Picture11.jpg" class="clickable-img" alt="Andy Hoon Shim" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 7. Ming Jie Li -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">7. Ming Jie Li</h3>
+          <div class="image-gallery">
+            <img src="logo/Picture12.jpg" class="clickable-img" alt="Ming Jie Li 1" onclick="openModal(this.src)">
+            <img src="logo/Picture13.jpg" class="clickable-img" alt="Ming Jie Li 2" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+        <!-- 8. Jeremy Chia -->
+        <div style="margin-bottom: 10px;">
+          <h3 style="font-size: 22px; color: var(--gold); margin-bottom: 8px;">8. Jeremy Chia</h3>
+          <div class="image-gallery">
+            <img src="logo/Picture14.jpg" class="clickable-img" alt="Jeremy Chia" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ==================== MARKET SEGMENTATION SECTION ==================== -->
+      
+      <div class="section-card">
+        <h2><i class="fa-solid fa-chart-pie"></i> MARKET SEGMENTATION, DESCRIPTION & GUIDELINES</h2>
+        <p>Each hotel reports Market Segments based on the same criteria and in accordance with the Accounting Standards in order to generate consistency in budgets, forecasts and P&L Statements.</p>
+        <p>The Director of Revenue Management is accountable for the correct segmentation.</p>
+      </div>
+
+      <!-- 1. Transient Market Segments -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-person-walking-luggage"></i> 1. Transient Market Segments</h2>
+        <p>Less than 10 rooms, or as determined by the property</p>
+        
+        <ul class="segment-list">
+          <li><strong>Rack:</strong> Every rate that is available to the general public, directly to the end consumer which reflects the BAR rate and has no further discounts (only exception - Consortia Rate) or added value (except breakfast, halfboard or fullboard if the hotel offers rates that include a mealplan only or as a choice) regardless of the channel the rate is sold. Not timely limited or bound to special conditions.<br>
+          <span class="example-text">Example: BAR Rate, Consortia Rate (even if discounted), all Bookings from OTAs that are selling at BAR Rate directly to the end consumer without a markup (booking.com, etc.)</span></li>
+          
+          <li><strong>Corporate:</strong> All Special Corporate Rates as outlined in your Sales and Marketing Plan.</li>
+          
+          <li><strong>Volume:</strong> All Volume Account Rates as outlined in your Sales and Marketing Plan.</li>
+          
+          <li><strong>RSVP:</strong> Only for hotels that run a RSVP program. All rates for RSVP Members, RSVP Referrals and all Special Promotions or Packages which are solely and exclusively distributed to RSVP Members.</li>
+          
+          <li><strong>Discount / Promotion:</strong> Any rate that has a discount (either percentage, amount, value add or credit) off BAR (except Consortia such as Amex, Virtuoso), that is only available to a limited audience or is bound to special conditions such as prepayment, advanced booking or cancellation policies. If available to the general public without restrictions, the rate must be for a limited time and promoted by a separate Marketing Initiative.<br>
+          <span class="example-text">Example: Advance Purchase, Owners Rate, Long Term Stays, Early Booking Rate, Staff Rate, Friends and Family, LHW Worldwide Sale, Rakuten Super Sale, Summer Promotion, Winter Promotion, Special Rates given by Sales or General Manager.</span></li>
+          
+          <li><strong>Package:</strong> Any rate that offers an additional item other than breakfast, halfboard, fullboard or credits. Package item can be a special meal plan (if outside halfboard and fullboard or if not already included in the hotels BAR rate), SPA items, activities, special events, tickets, etc. Packages outside special events should be available the whole year round.<br>
+          <span class="example-text">Example: Culinary Packages, Opera Package, Shopping Package, Christmas Package, New Year's Package.</span></li>
+          
+          <li><strong>Wholesale:</strong> All rates that are sold net of commission/markup to a Wholesaler, Tour Operator, DMC or Merchant Model Online Channel where the markup is deducted upfront</li>
+          
+          <li><strong>Complimentary:</strong> All reservations given complimentary for sales reasons such as Barter, Site Inspection, Compensation or Business Contacts.</li>
+          
+          <li><strong>House Use:</strong> All reservations given complimentary for non-sales reasons such as MOD room, Technicians, Staff room, Corporate Staff, etc. These bookings should not affect the occupancy or average daily rate.</li>
+        </ul>
+      </div>
+
+      <!-- 2. Group Market Segments -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-users"></i> 2. Group Market Segments</h2>
+        <p>More than 10 rooms or as determined by the hotel, on at least one of the stay dates within the stay period booked in the initial request.</p>
+        
+        <ul class="segment-list">
+          <li><strong>Corporate Group:</strong> Groups (rooms only or with function space) booked and travelling together that belong to a corporation or company and visit the hotel on business reasons such as meetings, conferences, exhibitions or incentives regardless if the meeting is in-house or at an outside location.</li>
+          
+          <li><strong>Association Group:</strong> Groups (rooms only or with function space) booked and travelling together that belong to one or more Associations and visit the hotel for reasons such as meetings, conferences, exhibitions or incentives regardless if the meeting is in-house or at an outside location.</li>
+          
+          <li><strong>Citywide Group:</strong> Groups (rooms only or with function space) booked and travelling together that visit and purpose of booking is a Citywide Event. Groups that stay during the period of a Citywide Event, but their purpose is not attending the Event, should not be considered Citywide Groups.</li>
+          
+          <li><strong>Entertainment Groups:</strong> Groups (rooms only or with function space) booked and travelling together that belong to the Entertainment Business such as Music Groups, Film or TV-Crews, Celebrities, etc.</li>
+          
+          <li><strong>Government Groups:</strong> Groups (rooms only or with function space) booked and travelling together that belong to a Department of the Government, Military or as part of a delegation.</li>
+          
+          <li><strong>Sports / Leisure Groups:</strong> Groups (rooms only or with function space) booked and travelling together for a Sport Event, such as Sport Teams (either professional, amateur or hobby) or Groups that are visiting for Wellness, Relaxation or Sightseeing such as Tour Operator Guided Groups or Individual Groups.</li>
+          
+          <li><strong>Social / Other Group:</strong> Groups (rooms only or with function space) booked and travelling together that visit the hotel for a Social Event such as Weddings, Anniversaries, Graduation Events, Bar Mitzwas, Awards Shows, etc. regardless if the event is in-house or at an outside location. This Market Segment is also used for any Groups, which do not fit into one of the above mentioned scenarios.</li>
+        </ul>
+      </div>
+
+      <!-- 3. Contract Rooms -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-file-signature"></i> 3. Contract Rooms</h2>
+        <p>Year round consecutive bookings.</p>
+        <span class="example-text">Example: Airline Crews, etc.</span>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <div class="footer-brand"><span class="footer-logo-icon"><img src="logo/bintang-capella.png" alt="star"></span><span class="footer-logo-text">CHG <em>Reservations</em> Standards</span></div>
+      <p class="footer-property">Capella Ubud, Bali</p>
+      <p class="footer-note">Internal Use Only — Authorized Personnel</p>
+      <p class="footer-copy">&copy; 2025 Capella Hotel Group. All rights reserved.</p>
+    </div></div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => { const navbar = document.getElementById('navbar'); if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 20); });
+    document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => document.getElementById('navMenu')?.classList.remove('open')); });
+  </script>
+</body>
+</html>

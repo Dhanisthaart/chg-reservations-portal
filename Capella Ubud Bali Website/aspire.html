@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHG – Aspire Test Call</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #B8974B;
+      --gold-light: #D4B26A;
+      --gold-deep: #8A6E30;
+      --ink: #1A1614;
+      --sand: #F7F3ED;
+      --sand-deep: #E5D9CE;
+      --white: #FDFAF7;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Jost', sans-serif;
+      --nav-h: 72px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--sand); line-height: 1.6; padding-top: var(--nav-h); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); z-index: 1000; border-bottom: 1px solid rgba(184,151,75,0.15); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; text-decoration: none; }
+    .nav-logo-mark img { width: 16px; height: auto; filter: brightness(0) invert(1); }
+    .nav-logo-text em { font-style: italic; color: var(--gold-light); }
+    .nav-menu { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-link { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.6); padding: 8px 16px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-light); }
+    .nav-logout { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.5); padding: 8px 16px; border: 1px solid rgba(184,151,75,0.3); margin-left: 8px; background: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .nav-logout:hover { color: var(--gold); border-color: var(--gold); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 18px; cursor: pointer; }
+    @media (max-width: 1100px) {
+      .nav-toggle { display: block; }
+      .nav-menu { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--ink); flex-direction: column; padding: 16px 0; gap: 0; }
+      .nav-menu.open { display: flex; }
+      .nav-link { padding: 12px 24px; width: 100%; }
+      .nav-logout { margin: 8px 24px; width: calc(100% - 48px); justify-content: center; }
+      .nav-inner { padding: 0 24px; }
+    }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('logo/Background-Call-Atas.jpg') center/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 0.8s ease; }
+    .ornament-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
+    .ornament-row .ornament-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .page-hero-eyebrow { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .page-hero-title { font-size: clamp(48px, 6vw, 72px); color: var(--white); font-weight: 500; }
+    .page-hero-title em { color: var(--gold-light); font-style: italic; }
+
+    /* CONTAINER */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 60px; }
+    @media (max-width: 1024px) { .container { padding: 0 40px; } }
+    @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+    /* PAGE MAIN */
+    .page-main { background: var(--sand); }
+    .page-main .container { padding-top: 70px; padding-bottom: 80px; }
+
+    /* SECTION STYLES */
+    .section-card { background: var(--white); padding: 40px 48px; margin-bottom: 48px; border-left: 6px solid var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .section-card h2 { font-size: 32px; font-family: var(--font-serif); color: var(--ink); margin-bottom: 28px; font-weight: 600; }
+    .section-card h2 i { color: var(--gold); margin-right: 12px; }
+    .section-card p { font-size: 18px; color: var(--ink); margin-bottom: 24px; line-height: 1.7; text-align: justify; }
+
+    /* CRITERIA LIST */
+    .criteria-list { list-style: none; margin: 20px 0; }
+    .criteria-list li { padding: 16px 0; padding-left: 40px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.6; text-align: justify; border-bottom: 1px solid var(--sand-deep); }
+    .criteria-list li:before { content: counter(item) "."; counter-increment: item; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+    .criteria-list { counter-reset: item; }
+
+    .sub-section { margin: 12px 0 0 20px; }
+    .sub-section strong { color: var(--gold); display: block; margin-bottom: 6px; }
+    .sub-bullet { list-style: none; margin: 6px 0 6px 24px; }
+    .sub-bullet li { padding: 4px 0; padding-left: 20px; position: relative; color: var(--ink); font-size: 16px; line-height: 1.5; border-bottom: none; }
+    .sub-bullet li:before { content: "•"; color: var(--gold); position: absolute; left: 0; }
+
+    /* FOOTER */
+    .footer { background: var(--ink); padding: 60px 0 40px; border-top: 1px solid rgba(184,151,75,0.15); }
+    .footer-inner { text-align: center; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon img { width: 18px; height: auto; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); }
+    .footer-logo-text em { color: var(--gold-light); }
+    .footer-property { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-note { font-size: 11px; color: rgba(253,250,247,0.3); margin-bottom: 8px; }
+    .footer-copy { font-size: 11px; color: rgba(253,250,247,0.25); }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 28px; }
+      .section-card h2 { font-size: 26px; }
+      .criteria-list li { font-size: 15px; padding-left: 32px; padding: 12px 0 12px 32px; }
+      .section-card p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    function checkAuth() { const session = localStorage.getItem('chg_auth_session'); if (!session) window.location.replace('index.html'); }
+    function handleLogout() { localStorage.removeItem('chg_auth_session'); window.location.replace('index.html'); }
+    function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+    checkAuth();
+  </script>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="home.html" class="nav-logo"><span class="nav-logo-mark"><img src="logo/bintang-capella.png" alt="star"></span><span class="nav-logo-text">CHG <em>Reservations</em></span></a>
+      <button class="nav-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mission.html" class="nav-link"><i class="fa-solid fa-star"></i> Mission</a></li>
+        <li><a href="data-entry.html" class="nav-link"><i class="fa-solid fa-database"></i> Data Entry</a></li>
+        <li><a href="vip.html" class="nav-link"><i class="fa-solid fa-crown"></i> VIP Code</a></li>
+        <li><a href="blacklist.html" class="nav-link"><i class="fa-solid fa-ban"></i> Blacklist</a></li>
+        <li><a href="aspire.html" class="nav-link active"><i class="fa-solid fa-phone"></i> Aspire</a></li>
+        <li><a href="revenue.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Revenue</a></li>
+<li><button class="nav-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="ornament-row">
+        <div class="ornament-line"></div>
+        <img src="logo/bintang-capella.png" alt="star" style="width: 24px; height: auto; filter: brightness(0) invert(1);">
+        <div class="ornament-line"></div>
+      </div>
+      <p class="page-hero-eyebrow">Call Handling Excellence</p>
+      <h1 class="page-hero-title">Aspire <em>Test Call</em></h1>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+
+      <!-- ASPIRE TEST CALL -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-phone"></i> ASPIRE TEST CALL</h2>
+        
+        <ul class="criteria-list">
+          <!-- 1 -->
+          <li>The telephone call was answered within 3 rings or 10 seconds with an appropriate greetings i.e. "Good Morning, thank you for calling Property Name, this is Agent's Name from Reservations. How may I assist you?"</li>
+          <!-- 2 -->
+          <li>Reservationist obtains the caller's name and clarify spelling where required. i.e. "How may I address you?". Caller's name is used naturally as a sign of recognition, throughout the duration of the call - 3 times minimum. Agent should only reconfirm the spelling upon booking confirmation</li>
+          <!-- 3 -->
+          <li>Telephone conversation is calm and clear. i.e. Free of background noise and or disturbance (i.e. makes the conversation difficult to hear or causes distractions.) Agents must use a headset for all guest calls</li>
+          <!-- 4 -->
+          <li>The guest is always asked permission before being placed on hold. i.e "Guest Name, may I place the call on hold for a moment while I confirm our availability during your requested dates?"</li>
+          <!-- 5 -->
+          <li>No telephone hold longer than 30 seconds without offering call-back.</li>
+          <!-- 6 -->
+          <li>Agent must clarify if the guest had stayed before i.e. "[Guest Name], would this stay be your first with Property Name?"<br>
+            <div class="sub-section">
+              <strong>If Yes:</strong>
+              <ul class="sub-bullet">
+                <li>Extend warm welcome, i.e. "We are thrilled to have you with us for the first time. We will do everything we can to ensure your stay is exceptional."</li>
+              </ul>
+              <strong>If No:</strong>
+              <ul class="sub-bullet">
+                <li>Extend a warm welcome back, i.e."It is wonderful to welcome you back, [Guest Name]! We are delighted you have chosen to stay with us again. As a returning guest, please be assured we are committed to making this visit even more memorable than the last."</li>
+              </ul>
+            </div>
+          </li>
+          <!-- 7 -->
+          <li>If the requested dates were unavailable, alternative dates or room option is offered.</li>
+          <!-- 8 -->
+          <li>Uncover the guest's needs and purpose of visit by asking at least one (1) open-ended question. i.e. "Will you be celebrating a special occasion, during your time with us in Property Name?"</li>
+          <!-- 9 -->
+          <li>Transitional phrase that positively reinforces that you can help the guest. Examples: "I would be delighted to assist you" or "It would be my pleasure to see what we have available."</li>
+          <!-- 10 -->
+          <li>Agent provides a hotel introduction by describing property facilities and procedures with clarity, make necessary recommendations based on needs/expectations, information provided should be relevant to the guest's needs/purpose of stay. (For returning guests, agents should provide information that is most updated and relevant to the guest's needs and purpose of stay.)</li>
+          <!-- 11 -->
+          <li>Clarify if the guest had any personal preferences (e.g. bed preference, smoking preference etc.)</li>
+          <!-- 12 -->
+          <li>Agent presents 2 choices of room types when available and/or appropriate using benefit statements and powerful words based on the need, wants and expectations before presenting the rates.</li>
+          <!-- 13 -->
+          <li>Agent can readily describe the various physical elements in the guest room and benefits to guests, by room type</li>
+          <!-- 14 -->
+          <li>Agent inquires if guest is a DISCOVERY Member prior to providing a rate quote<br>
+            <div class="sub-section">
+              <strong>If Yes:</strong>
+              <ul class="sub-bullet">
+                <li>Show recognition and appreciation, for example, "Thank you for your loyalty as a GHA DISCOVERY member"</li>
+                <li>Offer the member rate, for example, "I am pleased to offer you the exclusive members only rate for this stay"</li>
+                <li>Share ONE fact about member benefits, such as DISCOVERY Dollars, for example, "You will be able to earn and redeem your DISCOVERY Dollars during your stay"</li>
+              </ul>
+              <strong>If No:</strong>
+              <ul class="sub-bullet">
+                <li>Offer membership enrollment.</li>
+                <li>Share member benefits, such as the member rate and DISCOVERY Dollars.</li>
+              </ul>
+            </div>
+          </li>
+          <!-- 15 -->
+          <li>When appropriate presented a rate plan and/or package that would meet the needs, wants and expectations of the caller.</li>
+          <!-- 16 -->
+          <li>Agent clearly state the room rate and what it included/excluded (i.e. breakfast and living room access)</li>
+          <!-- 17 -->
+          <li>Agent confidently asked for sale. i.e. "[Guest Name] would you like me to proceed with the reservation?"<br>
+            <div class="sub-section">
+              <strong>If the guest responds with a "Yes" to the reservation query:</strong>
+              <ul class="sub-bullet">
+                <li>"Excellent [Guest Name], I will proceed with the reservation."</li>
+              </ul>
+              <strong>If the guest responds with a "No":</strong>
+              <ul class="sub-bullet">
+                <li>Enquire if guest would like to review alternate room types, date or rate plans</li>
+                <li>If guest still would not like to proceed - "Certainly, [Guest Name], I am here to assist you as needed. If you have any questions or if there is anything you would like to know please feel free to ask."</li>
+              </ul>
+            </div>
+          </li>
+          <!-- 18 -->
+          <li>Agent obtained caller's contact details (telephone number and email address)</li>
+          <!-- 19 -->
+          <li>Agent emphasises on the value, clearly explains deposit, flexible cancellation policies, penalty charge and etc.</li>
+          <!-- 20 -->
+          <li>Agent advises on payment options and obtains preference for payment mode to guarantee reservation (e.g. credit card etc.)</li>
+          <!-- 21 -->
+          <li>Ascertain the expected time of arrival, ask for flight details and advise the check in time (in the case where the guest was an early arrival).</li>
+          <!-- 22 -->
+          <li>Agent can effectively provide directions and/or transportation options and their associated costs. Agent should offer to assist with transportation reservations when relevant.</li>
+          <!-- 23 -->
+          <li>Agent offers hotel services, such as hotel/resort programme, dinner or spa reservations.</li>
+          <!-- 24 -->
+          <li>A reservation confirmation number is offered.</li>
+          <!-- 25 -->
+          <li>Agent advises that a pre-arrival email will be sent prior to guest arrival.</li>
+          <!-- 26 -->
+          <li>Details of the booking are repeated for confirmation. Reservation recap to include dates and day of the stay, room types, rates, requests, method of payment, cancellation and deposit requirement</li>
+          <!-- 27 -->
+          <li>Agent specifically thanks the guest for the booking and closes the interaction with a polite and appropriate remark. i.e. "Thank you [Guest's name], Is there anything else I may assist you with today?" followed by "It was a pleasure to assist you with your reservation. Once again, my name is Agent's Name from the reservation department. We look forward to welcome you on Arrival Date. Good bye".</li>
+          <!-- 28 -->
+          <li>Confirmation email is accurate</li>
+          <!-- 29 -->
+          <li>Confirmation is offered and received within 2 hours of the call.</li>
+          <!-- 30 -->
+          <li>The guest is fully prepared for their stay after the call, and they look forward to their visit with positive anticipation</li>
+          <!-- 31 -->
+          <li>Colleague / Teammate is highly articulate and avoids slang and excessive use of phrase-fragments</li>
+          <!-- 32 -->
+          <li>Colleague / Teammate is polite and maintains a gracious tone and appropriate pace throughout the interaction</li>
+          <!-- 33 -->
+          <li>Colleague / Teammate exhibits a genuine sense of interest and concern for the guest</li>
+          <!-- 34 -->
+          <li>Colleague / Teammate leads the conversation and is thoughtful and intuitive, demonstrating anticipatory service when appropriate and helpful</li>
+          <!-- 35 -->
+          <li>The service is handled without excessive delays or interruptions</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <div class="footer-brand"><span class="footer-logo-icon"><img src="logo/bintang-capella.png" alt="star"></span><span class="footer-logo-text">CHG <em>Reservations</em> Standards</span></div>
+      <p class="footer-property">Capella Ubud, Bali</p>
+      <p class="footer-note">Internal Use Only — Authorized Personnel</p>
+      <p class="footer-copy">&copy; 2025 Capella Hotel Group. All rights reserved.</p>
+    </div></div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => { const navbar = document.getElementById('navbar'); if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 20); });
+    document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => document.getElementById('navMenu')?.classList.remove('open')); });
+  </script>
+</body>
+</html>

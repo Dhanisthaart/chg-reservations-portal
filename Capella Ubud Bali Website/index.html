@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHG Reservations Standards – Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --gold: #B8974B;
+      --gold-light: #D4B26A;
+      --gold-deep: #8A6E30;
+      --white: #FDFAF7;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Jost', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body.login-body {
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+    }
+
+    /* BACKGROUND */
+    .login-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('logo/Backgroup-Index.jpg') center/cover no-repeat;
+    }
+    .login-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,22,20,0.85) 0%, rgba(42,51,40,0.8) 100%);
+    }
+
+    .login-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 100vh;
+      flex-wrap: wrap;
+    }
+
+    /* LEFT PANEL & RIGHT PANEL SAMA LEBAR */
+    .login-brand-panel,
+    .login-form-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      min-height: 100vh;
+    }
+
+    /* LEFT PANEL */
+    .login-brand-content {
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* LOGO */
+    .login-logo-top {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .login-capella-logo {
+      width: 280px;
+      max-width: 80%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* TULISAN */
+    .big-chg {
+      font-size: 68px;
+      font-weight: 600;
+      color: var(--white);
+      font-family: var(--font-serif);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .big-dept {
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--gold-light);
+      font-family: var(--font-serif);
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .big-standards {
+      font-size: 17px;
+      color: var(--gold-light);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      margin-bottom: 40px;
+    }
+    .big-sub {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(253,250,247,0.8);
+      margin-bottom: 40px;
+    }
+    .big-divider {
+      height: 1px;
+      background: rgba(184,151,75,0.4);
+      margin-bottom: 40px;
+    }
+    .big-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.4;
+      color: var(--gold-light);
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    /* RIGHT PANEL - LOGIN FORM */
+    .login-form-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(253,250,247,0.05);
+      border: 1px solid rgba(184,151,75,0.25);
+      padding: 48px 40px;
+      backdrop-filter: blur(12px);
+    }
+    .login-form-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .login-logo-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--white);
+      font-size: 20px;
+    }
+    .login-form-title {
+      font-size: 26px;
+      color: var(--white);
+      font-family: var(--font-serif);
+      margin-bottom: 8px;
+    }
+    .login-form-sub {
+      font-size: 13px;
+      color: rgba(253,250,247,0.5);
+    }
+    .login-error {
+      background: rgba(200,60,60,0.2);
+      border: 1px solid rgba(200,60,60,0.5);
+      padding: 12px;
+      margin-bottom: 20px;
+      color: #ff8a8a;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper input {
+      width: 100%;
+      background: rgba(253,250,247,0.08);
+      border: 1px solid rgba(184,151,75,0.3);
+      padding: 14px 48px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+    }
+    .input-wrapper input:focus {
+      border-color: var(--gold);
+    }
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+    }
+    .toggle-pw {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(253,250,247,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: var(--white);
+      padding: 16px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 900px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+      .login-brand-panel,
+      .login-form-panel {
+        min-height: auto;
+        padding: 40px;
+      }
+      .login-brand-content {
+        text-align: center;
+      }
+      .big-quote {
+        text-align: left;
+      }
+      .login-capella-logo {
+        width: 200px;
+      }
+      .big-chg {
+        font-size: 52px;
+      }
+      .big-dept {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body class="login-body">
+
+  <div class="login-bg">
+    <div class="login-bg-overlay"></div>
+  </div>
+
+  <div class="login-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="login-brand-panel">
+      <div class="login-brand-content">
+        
+        <div class="login-logo-top">
+          <img src="logo/logo-capella.png" alt="Capella Hotel Group" class="login-capella-logo">
+        </div>
+
+        <div class="login-big-text">
+          <div class="big-chg">CHG</div>
+          <div class="big-dept">Reservations Department</div>
+          <div class="big-standards">Standards, Policies and Requirements</div>
+          <div class="big-sub">An internal excellence portal for the Reservations Department — where every detail defines the guest journey.</div>
+          <div class="big-divider"></div>
+          <div class="big-quote">"We do not simply take reservations.<br/>We craft the first act of every stay."</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL - LOGIN FORM -->
+    <div class="login-form-panel">
+      <div class="login-form-card">
+        <div class="login-form-header">
+          <div class="login-logo-badge">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <h2 class="login-form-title">Staff Portal Access</h2>
+          <p class="login-form-sub">Please sign in with your credentials</p>
+        </div>
+
+        <div id="loginError" class="login-error" style="display:none;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="loginErrorMsg"></span>
+        </div>
+
+        <div class="login-form-body">
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input type="email" id="loginEmail" placeholder="name@capellahotels.com"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="loginPassword" placeholder="Enter your password"/>
+              <button class="toggle-pw" type="button" onclick="togglePassword()">
+                <i class="fa-regular fa-eye" id="pwEyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <button class="login-btn" onclick="handleLogin()">
+            <span>Sign In</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const VALID_EMAIL_DOMAIN = '@capellahotels.com';
+    const VALID_PASSWORD = 'aptx4869';
+    const SESSION_KEY = 'chg_auth_session';
+
+    function handleLogin() {
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+      const errorBox = document.getElementById('loginError');
+      const errorMsg = document.getElementById('loginErrorMsg');
+
+      errorBox.style.display = 'none';
+
+      if (!email || !password) {
+        errorMsg.textContent = 'Please enter both email and password.';
+        errorBox.style.display = 'flex';
+        return;
+      }
+
+      if (!email.endsWith(VALID_EMAIL_DOMAIN)) {
+        errorMsg.textContent = 'Access restricted to @capellahotels.com email addresses only.';
+        errorBox.style.display = 'flex';
+        return;
+      }
+
+      if (password !== VALID_PASSWORD) {
+        errorMsg.textContent = 'Incorrect password. Please try again.';
+        errorBox.style.display = 'flex';
+        return;
+      }
+
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ email, loginTime: Date.now() }));
+      window.location.href = 'home.html';
+    }
+
+    function togglePassword() {
+      const input = document.getElementById('loginPassword');
+      const icon = document.getElementById('pwEyeIcon');
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      icon.className = isHidden ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    }
+  </script>
+</body>
+</html>

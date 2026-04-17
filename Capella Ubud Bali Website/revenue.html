@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHG – Room Revenue Standard Requirement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #B8974B;
+      --gold-light: #D4B26A;
+      --gold-deep: #8A6E30;
+      --ink: #1A1614;
+      --sand: #F7F3ED;
+      --sand-deep: #E5D9CE;
+      --white: #FDFAF7;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Jost', sans-serif;
+      --nav-h: 72px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--sand); line-height: 1.6; padding-top: var(--nav-h); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); z-index: 1000; border-bottom: 1px solid rgba(184,151,75,0.15); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; text-decoration: none; }
+    .nav-logo-mark img { width: 16px; height: auto; filter: brightness(0) invert(1); }
+    .nav-logo-text em { font-style: italic; color: var(--gold-light); }
+    .nav-menu { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-link { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.6); padding: 8px 16px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-light); }
+    .nav-logout { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.5); padding: 8px 16px; border: 1px solid rgba(184,151,75,0.3); margin-left: 8px; background: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .nav-logout:hover { color: var(--gold); border-color: var(--gold); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 18px; cursor: pointer; }
+    @media (max-width: 1100px) {
+      .nav-toggle { display: block; }
+      .nav-menu { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--ink); flex-direction: column; padding: 16px 0; gap: 0; }
+      .nav-menu.open { display: flex; }
+      .nav-link { padding: 12px 24px; width: 100%; }
+      .nav-logout { margin: 8px 24px; width: calc(100% - 48px); justify-content: center; }
+      .nav-inner { padding: 0 24px; }
+    }
+
+    /* PAGE HERO - BACKGROUND SUDAH BENAR */
+    .page-hero { position: relative; height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('logo/Background-Revenue-Atas.jpg') center/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 0.8s ease; }
+    .ornament-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
+    .ornament-row .ornament-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .page-hero-eyebrow { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .page-hero-title { font-size: clamp(48px, 6vw, 72px); color: var(--white); font-weight: 500; }
+    .page-hero-title em { color: var(--gold-light); font-style: italic; }
+
+    /* CONTAINER */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 60px; }
+    @media (max-width: 1024px) { .container { padding: 0 40px; } }
+    @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+    /* PAGE MAIN */
+    .page-main { background: var(--sand); }
+    .page-main .container { padding-top: 70px; padding-bottom: 80px; }
+
+    /* SECTION STYLES */
+    .section-card { background: var(--white); padding: 40px 48px; margin-bottom: 48px; border-left: 6px solid var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .section-card h2 { font-size: 32px; font-family: var(--font-serif); color: var(--ink); margin-bottom: 28px; font-weight: 600; }
+    .section-card h2 i { color: var(--gold); margin-right: 12px; }
+    .section-card p { font-size: 18px; color: var(--ink); margin-bottom: 24px; line-height: 1.7; text-align: justify; }
+
+    .bullet-list { list-style: none; margin: 20px 0; }
+    .bullet-list li { padding: 8px 0; padding-left: 24px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.5; text-align: justify; }
+    .bullet-list li:before { content: "•"; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+    .quote-text { font-style: italic; color: var(--ink); margin: 16px 0; padding-left: 24px; border-left: 3px solid var(--gold); }
+
+    /* IMAGE GALLERY */
+    .image-gallery { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; justify-content: center; }
+    .clickable-img { max-width: 100%; height: auto; max-height: 400px; cursor: pointer; border-radius: 4px; border: 1px solid var(--sand-deep); transition: transform 0.2s; object-fit: contain; }
+    .clickable-img:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+    /* MODAL ZOOM */
+    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); cursor: pointer; }
+    .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .close-modal { position: absolute; top: 20px; right: 35px; color: var(--gold-light); font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
+    .close-modal:hover { color: var(--white); }
+
+    /* FOOTER */
+    .footer { background: var(--ink); padding: 60px 0 40px; border-top: 1px solid rgba(184,151,75,0.15); }
+    .footer-inner { text-align: center; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon img { width: 18px; height: auto; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); }
+    .footer-logo-text em { color: var(--gold-light); }
+    .footer-property { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-note { font-size: 11px; color: rgba(253,250,247,0.3); margin-bottom: 8px; }
+    .footer-copy { font-size: 11px; color: rgba(253,250,247,0.25); }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 28px; }
+      .section-card h2 { font-size: 26px; }
+      .bullet-list li { font-size: 15px; }
+      .section-card p { font-size: 16px; }
+      .clickable-img { max-height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    function checkAuth() { const session = localStorage.getItem('chg_auth_session'); if (!session) window.location.replace('index.html'); }
+    function handleLogout() { localStorage.removeItem('chg_auth_session'); window.location.replace('index.html'); }
+    function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+    checkAuth();
+
+    function openModal(imgSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = 'block';
+      modalImg.src = imgSrc;
+    }
+    function closeModal() { document.getElementById('imageModal').style.display = 'none'; }
+  </script>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="home.html" class="nav-logo"><span class="nav-logo-mark"><img src="logo/bintang-capella.png" alt="star"></span><span class="nav-logo-text">CHG <em>Reservations</em></span></a>
+      <button class="nav-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mission.html" class="nav-link"><i class="fa-solid fa-star"></i> Mission</a></li>
+        <li><a href="data-entry.html" class="nav-link"><i class="fa-solid fa-database"></i> Data Entry</a></li>
+        <li><a href="vip.html" class="nav-link"><i class="fa-solid fa-crown"></i> VIP Code</a></li>
+        <li><a href="blacklist.html" class="nav-link"><i class="fa-solid fa-ban"></i> Blacklist</a></li>
+        <li><a href="aspire.html" class="nav-link"><i class="fa-solid fa-phone"></i> Aspire</a></li>
+        <li><a href="revenue.html" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Revenue</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Modal for Image Zoom -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="ornament-row">
+        <div class="ornament-line"></div>
+        <img src="logo/bintang-capella.png" alt="star" style="width: 24px; height: auto; filter: brightness(0) invert(1);">
+        <div class="ornament-line"></div>
+      </div>
+      <p class="page-hero-eyebrow">Revenue Management Excellence</p>
+      <h1 class="page-hero-title">Room Revenue <em>Standard Requirement</em></h1>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+
+      <!-- A. Revenue Culture -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-chart-line"></i> A. Revenue Culture</h2>
+        <p><strong>Revenue Management is a culture and philosophy</strong></p>
+        <ul class="bullet-list">
+          <li>Revenue/Yield meeting should be organized once a week with General Manager, Director of Sales & Marketing, Director of Rooms, Front Office Manager, Reservations Manager, Director of Sales, Director of Catering and Director of F&B in attendance.</li>
+          <li>Develop culture of Revenue Management in your hotel: anyone should understand REVPAR, anyone should understand the reasons of saying yes or no to some business, everyone should sell not only price but also value, encourage upselling and promote cross selling.</li>
+        </ul>
+      </div>
+
+      <!-- B. Capture The Best Hotel Data -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-database"></i> B. Capture The Best Hotel Data</h2>
+        <div class="quote-text">
+          <i class="fa-solid fa-quote-left" style="margin-right: 8px; color: var(--gold);"></i>
+          I never guess. It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.
+          <div style="margin-top: 8px;">-- Sir Arthur Conan Doyle, Author of Sherlock Holmes stories</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Records statistics for knowledge based decisions. Train your team for recording properly reservation information: profiles (guest, company, agency), booking source, country of residence.</li>
+          <li>Keep consistent records of your data: reservations on the books, waitlist, denials, walk out, cancellations, rate codes, market segmentations, etc.</li>
+          <li>Automation – systems must be interface to maximise revenue optimisation, maximise efficiency and automatic data capture.</li>
+          <li>All report must be accurate and all statistical reports must match finance P&L report.</li>
+        </ul>
+      </div>
+
+      <!-- C. Pricing -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-tag"></i> C. Pricing</h2>
+        <div class="quote-text">
+          <i class="fa-solid fa-quote-left" style="margin-right: 8px; color: var(--gold);"></i>
+          Price is what you pay. Value is what you get.
+          <div style="margin-top: 8px;">-- Warren Buffett</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Hotel to adopt Dynamic Pricing Models – maximise usage of dynamic pricing to include packages and corporate rates.</li>
+          <li>Develop pricing points as per expected scenario of demand: from low to high demand at your hotel versus pricing and availability of the competitors.</li>
+          <li>Encourage starting selling first lower rates and higher rates closer to the dates.</li>
+          <li>Rate Parity - The objective of rate parity in hotels is to encourage consumers to book direct. They should not find any advantage of booking via a third party website over making a reservation on our own hotel website. Think value added, fenced rates, consortia pricing, opaque pricing to go around this.</li>
+          <li>Rate Integrity – fair pricing, rationalizing pricing discount. Think Early Bird, Advance Purchase, Stay 3 Pay 2</li>
+        </ul>
+      </div>
+
+      <!-- D. Benchmarking and KPI -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-chart-simple"></i> D. Benchmarking and KPI</h2>
+        <div class="quote-text">
+          <i class="fa-solid fa-quote-left" style="margin-right: 8px; color: var(--gold);"></i>
+          Know your enemy and know yourself; in a hundred battles, you will never be defeated.
+          <div style="margin-top: 8px;">-- Sun Tzu</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Forecast accuracy – achieve 3% maximum (+/-) variance for the next month, variance between forecast and actual result.</li>
+          <li>Market Share report, based on STR - MPI/ARI/RGI result against the competitive set as stated in the HMA or otherwise determined by the management.</li>
+          <li>RevPAR and GOPPar result against budget and forecast.</li>
+          <li>Business intelligent report – subscribe to Business Intelligence solutions, make smart decisions by utilizing high quality, forward looking data.</li>
+        </ul>
+      </div>
+
+      <!-- E. System Automations -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-microchip"></i> E. System Automations</h2>
+        <div class="quote-text">
+          <i class="fa-solid fa-quote-left" style="margin-right: 8px; color: var(--gold);"></i>
+          Modern technology has become a total phenomenon for civilization, the defining force of a new social order in which efficiency is no longer an option but a necessity imposed on all human activity.
+          <div style="margin-top: 8px;">-- Jacques Ellul</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Effective revenue management is the key to maximizing profitability for any hotel business, ensuring rates are optimized as per the seasonal peaks and valleys for meaningful occupancy figures. System integration and automated revenue management systems is imperative.</li>
+          <li>Hotel's Property Management System (PMS) to have 2-way interface with booking engine and LHW if applicable.</li>
+          <li>Booking Engine to have direct connectivity with Online Travel Agencies, GDS, ODD and IDS</li>
+          <li>Revenue Management System is integrated with Hotels' PMS</li>
+        </ul>
+      </div>
+
+      <!-- F. Distributions -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-globe"></i> F. Distributions</h2>
+        <div class="quote-text">
+          <i class="fa-solid fa-quote-left" style="margin-right: 8px; color: var(--gold);"></i>
+          A product with better distribution will always win over a superior product with poor distribution or customer access. It's not fair. It's not right. But it's a reality!
+          <div style="margin-top: 8px;">— Stephen Davis</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Optimized distribution mix of rates and inventory. Analyse each channel and understood what is the best mix at certain given time</li>
+          <li>Limit OTA to a maximum of 5 producing OTA for the market and must have direct connectivity</li>
+        </ul>
+      </div>
+
+      <!-- A. Market Codes/Market Groups/Rate Category and Rate Class Setup Summary -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-table-list"></i> A. Market Codes/Market Groups/Rate Category and Rate Class Setup Summary</h2>
+        <div class="image-gallery">
+          <img src="logo/Picture15.jpg" class="clickable-img" alt="Market Codes Setup" onclick="openModal(this.src)">
+        </div>
+      </div>
+
+      <!-- B. Source Codes -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-code-branch"></i> B. Source Codes</h2>
+        <p>How the booking was made by the guests/booker – rate origin to a certain extend such as Wholesalers will be noted under Sales Wholesalers</p>
+        <div class="image-gallery">
+          <img src="logo/Picture16.jpg" class="clickable-img" alt="Source Codes" onclick="openModal(this.src)">
+        </div>
+      </div>
+
+      <!-- C. Origin Codes -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-location-dot"></i> C. Origin Codes</h2>
+        <p>How the booking was received by the hotel. – How Did You Hear About Us?</p>
+        <div class="image-gallery">
+          <img src="logo/Picture17.jpg" class="clickable-img" alt="Origin Codes" onclick="openModal(this.src)">
+        </div>
+      </div>
+
+      <!-- D. Reservations Types -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-bed"></i> D. Reservations Types</h2>
+        <p>Below is the Reservations Types, codes and descriptions, as well as how it should be setup in related to inventory deductions and mandatory fields.</p>
+        <div class="image-gallery">
+          <img src="logo/Picture18.jpg" class="clickable-img" alt="Reservations Types" onclick="openModal(this.src)">
+        </div>
+      </div>
+
+      <!-- E. Cancellation Reasons -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-ban"></i> E. Cancellation Reasons</h2>
+        <div class="image-gallery">
+          <img src="logo/Picture19.jpg" class="clickable-img" alt="Cancellation Reasons" onclick="openModal(this.src)">
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <div class="footer-brand"><span class="footer-logo-icon"><img src="logo/bintang-capella.png" alt="star"></span><span class="footer-logo-text">CHG <em>Reservations</em> Standards</span></div>
+      <p class="footer-property">Capella Ubud, Bali</p>
+      <p class="footer-note">Internal Use Only — Authorized Personnel</p>
+      <p class="footer-copy">&copy; 2025 Capella Hotel Group. All rights reserved.</p>
+    </div></div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => { const navbar = document.getElementById('navbar'); if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 20); });
+    document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => document.getElementById('navMenu')?.classList.remove('open')); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHG – Data Entry Standards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #B8974B;
+      --gold-light: #D4B26A;
+      --gold-deep: #8A6E30;
+      --ink: #1A1614;
+      --sand: #F7F3ED;
+      --sand-deep: #E5D9CE;
+      --white: #FDFAF7;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Jost', sans-serif;
+      --nav-h: 72px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--sand); line-height: 1.6; padding-top: var(--nav-h); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); z-index: 1000; border-bottom: 1px solid rgba(184,151,75,0.15); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; text-decoration: none; }
+    .nav-logo-mark img { width: 16px; height: auto; filter: brightness(0) invert(1); }
+    .nav-logo-text em { font-style: italic; color: var(--gold-light); }
+    .nav-menu { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-link { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.6); padding: 8px 16px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-light); }
+    .nav-logout { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,247,0.5); padding: 8px 16px; border: 1px solid rgba(184,151,75,0.3); margin-left: 8px; background: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .nav-logout:hover { color: var(--gold); border-color: var(--gold); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 18px; cursor: pointer; }
+    @media (max-width: 1100px) {
+      .nav-toggle { display: block; }
+      .nav-menu { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--ink); flex-direction: column; padding: 16px 0; gap: 0; }
+      .nav-menu.open { display: flex; }
+      .nav-link { padding: 12px 24px; width: 100%; }
+      .nav-logout { margin: 8px 24px; width: calc(100% - 48px); justify-content: center; }
+      .nav-inner { padding: 0 24px; }
+    }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('logo/Background-Data-Entry-Atas.jpg') center/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 0.8s ease; }
+    .ornament-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
+    .ornament-row .ornament-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .page-hero-eyebrow { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .page-hero-title { font-size: clamp(48px, 6vw, 72px); color: var(--white); font-weight: 500; }
+    .page-hero-title em { color: var(--gold-light); font-style: italic; }
+
+    /* CONTAINER */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 60px; }
+    @media (max-width: 1024px) { .container { padding: 0 40px; } }
+    @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+    /* PAGE MAIN */
+    .page-main { background: var(--sand); }
+    .page-main .container { padding-top: 70px; padding-bottom: 80px; }
+
+    /* SEARCH BAR */
+    .search-container { margin-bottom: 32px; display: flex; justify-content: flex-start; }
+    .search-box { display: flex; align-items: center; background: var(--white); border: 1px solid var(--sand-deep); border-radius: 40px; padding: 12px 24px; width: 320px; }
+    .search-box i { color: var(--gold); margin-right: 12px; font-size: 16px; }
+    .search-box input { border: none; outline: none; background: transparent; width: 100%; font-size: 15px; font-family: var(--font-body); }
+
+    /* SECTION STYLES */
+    .section-card { background: var(--white); padding: 40px 48px; margin-bottom: 48px; border-left: 6px solid var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .section-card h2 { font-size: 32px; font-family: var(--font-serif); color: var(--ink); margin-bottom: 28px; font-weight: 600; }
+    .section-card h2 i { color: var(--gold); margin-right: 12px; }
+    .section-card p { font-size: 18px; color: var(--ink); margin-bottom: 24px; line-height: 1.7; text-align: justify; }
+
+    /* TABLES */
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 16px; }
+    .data-table th { background: var(--ink); color: var(--gold-light); padding: 16px 20px; text-align: left; font-weight: 700; text-transform: uppercase; font-size: 14px; }
+    .data-table td { padding: 14px 20px; border-bottom: 1px solid var(--sand-deep); color: var(--ink); vertical-align: top; font-size: 16px; }
+    .data-table tr:hover td { background: var(--sand); }
+
+    .country-table-container { overflow-x: auto; }
+    .country-table { width: 100%; border-collapse: collapse; font-size: 16px; }
+    .country-table th { background: var(--ink); color: var(--gold-light); padding: 16px 20px; text-align: left; font-weight: 700; text-transform: uppercase; font-size: 14px; }
+    .country-table td { padding: 14px 20px; border-bottom: 1px solid var(--sand-deep); color: var(--ink); vertical-align: top; font-size: 16px; line-height: 1.5; }
+    .country-table tr:hover td { background: var(--sand); }
+    .country-table td:first-child { font-weight: 600; }
+
+    .address-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
+    .address-table th { background: var(--ink); color: var(--gold-light); padding: 14px 16px; text-align: left; font-weight: 700; text-transform: uppercase; font-size: 13px; }
+    .address-table td { padding: 12px 16px; border-bottom: 1px solid var(--sand-deep); color: var(--ink); vertical-align: top; font-size: 15px; }
+
+    /* SYMBOL GRID */
+    .symbol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; padding: 20px; background: var(--sand); border: 1px solid var(--sand-deep); }
+    .symbol-col { list-style: none; }
+    .symbol-col li { padding: 8px 0; font-family: monospace; font-size: 16px; color: var(--ink); border-bottom: 1px dashed var(--sand-deep); }
+
+    /* BULLET LISTS */
+    .rule-list { list-style: none; margin: 20px 0; }
+    .rule-list li { padding: 10px 0; padding-left: 28px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.5; text-align: justify; }
+    .rule-list li:before { content: "✓"; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+    .bullet-list { list-style: none; margin: 20px 0; }
+    .bullet-list li { padding: 8px 0; padding-left: 24px; position: relative; color: var(--ink); font-size: 17px; line-height: 1.5; text-align: justify; }
+    .bullet-list li:before { content: "•"; color: var(--gold); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+    .italic-text { font-style: italic; color: var(--ink); }
+
+    /* FOOTER */
+    .footer { background: var(--ink); padding: 60px 0 40px; border-top: 1px solid rgba(184,151,75,0.15); }
+    .footer-inner { text-align: center; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon img { width: 18px; height: auto; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); }
+    .footer-logo-text em { color: var(--gold-light); }
+    .footer-property { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-note { font-size: 11px; color: rgba(253,250,247,0.3); margin-bottom: 8px; }
+    .footer-copy { font-size: 11px; color: rgba(253,250,247,0.25); }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 28px; }
+      .section-card h2 { font-size: 26px; }
+      .data-table, .country-table, .address-table { font-size: 14px; }
+      .data-table th, .data-table td, .country-table th, .country-table td, .address-table th, .address-table td { padding: 10px 12px; }
+      .search-box { width: 100%; }
+      .search-container { justify-content: stretch; }
+      .rule-list li, .bullet-list li { font-size: 15px; }
+      .section-card p { font-size: 16px; }
+      .symbol-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    function checkAuth() { const session = localStorage.getItem('chg_auth_session'); if (!session) window.location.replace('index.html'); }
+    function handleLogout() { localStorage.removeItem('chg_auth_session'); window.location.replace('index.html'); }
+    function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+    checkAuth();
+    function searchCountryTable() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const table = document.getElementById('countryTable');
+      const rows = table.getElementsByTagName('tr');
+      for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        if (cells.length > 0) {
+          const text = cells[0].textContent.toLowerCase() + cells[1].textContent.toLowerCase() + cells[2].textContent.toLowerCase() + cells[3].textContent.toLowerCase();
+          rows[i].style.display = text.includes(filter) ? '' : 'none';
+        }
+      }
+    }
+  </script>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="home.html" class="nav-logo"><span class="nav-logo-mark"><img src="logo/bintang-capella.png" alt="star"></span><span class="nav-logo-text">CHG <em>Reservations</em></span></a>
+      <button class="nav-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mission.html" class="nav-link"><i class="fa-solid fa-star"></i> Mission</a></li>
+        <li><a href="data-entry.html" class="nav-link active"><i class="fa-solid fa-database"></i> Data Entry</a></li>
+        <li><a href="vip.html" class="nav-link"><i class="fa-solid fa-crown"></i> VIP Code</a></li>
+        <li><a href="blacklist.html" class="nav-link"><i class="fa-solid fa-ban"></i> Blacklist</a></li>
+        <li><a href="aspire.html" class="nav-link"><i class="fa-solid fa-phone"></i> Aspire</a></li>
+       <li><a href="revenue.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Revenue</a></li>
+        <li><button class="nav-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="ornament-row"><div class="ornament-line"></div><img src="logo/bintang-capella.png" alt="star" style="width: 24px; height: auto; filter: brightness(0) invert(1);"><div class="ornament-line"></div></div>
+      <p class="page-hero-eyebrow">STANDARDS & PROTOCOLS</p>
+      <h1 class="page-hero-title">Data Entry <em>Standards</em></h1>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+
+      <!-- Data Entry Standards -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-database"></i> Data Entry Standards – Individual Guests</h2>
+        <p>Guest profiles comprise of basic non-varying information such as guest name, address, contact details, language, as well as statistical information about stays in the current and previous years. A profile also includes a listing of future reservations, previous stays and guest preferences.</p>
+      </div>
+
+      <!-- Standards -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-list-check"></i> Standards</h2>
+        <ul class="rule-list">
+          <li><strong>Individual profile</strong> is a profile for only one person. In the case of husband and wife, or guest travelling with family, each should have their own individual profiles created separately.</li>
+          <li>All guest profiles should contain the absolute minimum fields below. The 4 fields below are the main ones which guarantee proper profile interface between systems:<br><strong>Last Name | First Name | Country of Residence | Email address</strong></li>
+          <li>The other fields listed below should also be correctly entered when available:<br><strong>Address | City, State / Province | Telephone numbers | Company | Preferences | Notes (Central Comment) | VIP Status</strong></li>
+        </ul>
+      </div>
+
+      <!-- Character Encoding -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-language"></i> Considerations in Character Encoding</h2>
+        <ul class="rule-list">
+          <li>All data are to be entered in proper (upper, lower) case where applicable using the 26 character English (UK) alphabet. For special characters of a local language (i.e. ö,ë), they need to be adapted to the International spelling. However, in Opera central environment, special local characters are supported in certain fields like Last Name, First Name or Address Fields (Street, Building and City).</li>
+          <li>Data on the profile main screen should always be entered in English language. Any other local languages like German, French, Chinese, Japanese, etc. should be entered into the equivalent English characters.</li>
+          <li>Commas and period and the following symbols are not to be used in Name or Address elements:</li>
+        </ul>
+        <div class="symbol-grid">
+          <ul class="symbol-col"><li>( ) Parentheses</li><li>" " Double quotes</li><li>= Double hyphen</li><li>[ ] Brackets</li></ul>
+          <ul class="symbol-col"><li>... Ellipsis</li><li>: Colon</li><li>; Semicolon</li><li># Pound sign</li></ul>
+          <ul class="symbol-col"><li>% Percent</li><li>^ Carat</li><li>* Asterisks</li></ul>
+        </div>
+        <ul class="rule-list">
+          <li><strong>Punctuation Exceptions:</strong> In the case of a private registered guest, proceeding the guest's last name (PR) is allowed (e.g. (PR) Cruise). Use @ only in conjunction with an e-mail address (e.g. john@raffles.com).</li>
+        </ul>
+      </div>
+
+      <!-- Guest Name -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-user"></i> Guest Name</h2>
+        <table class="data-table">
+          <thead><tr><th>FIELD</th><th>RULES</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Title</strong></td><td><ul class="bullet-list"><li>Enter the guest's title into the title field</li><li>The title is courtesy prefixed to the name of a person. It is usually written in the abbreviated form i.e. Mr., Mrs., etc. The title changes according to the guest's language.</li><li>In GHA OCIS, only 3 titles will be configured – Mr., Mrs., Ms.</li></ul></td></tr>
+            <tr><td><strong>Last Name</strong></td><td><ul class="bullet-list"><li>Enter the guest's full last name and in the format provided by the guest or in reference to the passport, ID card or driver's license entry.</li><li>Use a hyphen to separate a compound name (e.g. Jones-Smith) if one is provided</li><li>Two worded last name should appear with a space between names (e.g. La Salle)</li><li>Use apostrophes (') when the symbol is part of the proper name. Omit spaces before and after names with apostrophes (e.g. O'Brien)</li><li>All name beginning with Mc or Mac will be in the form of MacDonald, McKinley (no spaces between)</li><li>All last names beginning with Al, the Al will be placed as it is. Al Hussein should be written Al Hussein.</li></ul></td></tr>
+            <tr><td><strong>First Names</strong></td><td><ul class="bullet-list"><li>Enter the guest's full first name in the First Name field.</li><li>If the guest has two or more first names enter them into the first name field only (e.g. Mary Katherine / Clive Stafford Andrew).</li><li>If the guest has an English and Chinese (or any local/ethnic dialect) first names, enter the English name first followed by the Chinese / local / ethnic name in the First Name field. (e.g. Jacky Hok Yau)</li><li>Do not use the short forms of the first name (e.g. Wm for William)</li><li>The first name field should only have one person's name. In the case of husband and wife, each should have their own individual profiles created separately. For example: Mr & Mrs James & Lily Potter, the first name field in the husband profile should only carry 'James' but never be 'James & Lily'.</li><li>All name with bin or binte or binti, will be written without it, Jamal bin Al Hussein, will be written as Last name: Al Hussein and First name: Jamal.</li></ul></td></tr>
+            <tr><td><strong>Middle Name</strong></td><td><strong>Do not use middle name field.</strong> First Name and Middle Name must be entered into First Name field.</td></tr>
+            <tr><td><strong>Suffixes</strong></td><td>All suffixes such as Junior, Senior, II, III will be entered into the last name field (no periods) and spelled out completely – do not abbreviate.</td></tr>
+          </tbody>
+        </table>
+        <p class="italic-text"><em>The last and first name fields are used differently in different countries. In a situation where you are dealing with a guest name of a nation that you are not familiar with, please verify with the guest how the name should be entered.</em></p>
+      </div>
+
+      <!-- Name Entry by Country -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-globe"></i> Name Entry by Country</h2>
+        <div class="search-container"><div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="Search country, guest name, or format..." onkeyup="searchCountryTable()"></div></div>
+        <div class="country-table-container">
+          <table class="country-table" id="countryTable">
+            <thead><tr><th>ORIGIN OF GUESTS</th><th>GUEST NAME</th><th>NAME ENTRY FORMAT</th><th>REMARKS</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Western</strong></td><td>James Smith</td><td><strong>Last Name:</strong> Smith<br><strong>First Name:</strong> James</td><td>The name should be copied exactly as stated in the passport.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Lily MacKenzie</td><td><strong>Last Name:</strong> MacKenzie<br><strong>First Name:</strong> Lily<br>Also: McKenzie</td><td>Some last names have no space between syllables and are written in upper and lower case.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Peter McEnroe</td><td><strong>Last Name:</strong> McEnroe<br><strong>First Name:</strong> Peter</td><td>Some last names have a space between syllables.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Eric O'Leary</td><td><strong>Last Name:</strong> O'Leary<br><strong>First Name:</strong> Eric</td><td>Some last names have an apostrophe and the letter after the apostrophe must be in upper case.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Thomas Jonas-Kranz</td><td><strong>Last Name:</strong> Jonas-Kranz<br><strong>First Name:</strong> Thomas</td><td>Double names can also be hyphenated, if the guest gives specific instructions.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Sophie de la Ruche</td><td><strong>Last Name:</strong> de la Ruche<br><strong>First Name:</strong> Sophie</td><td>Additives to names are entered in front of the name and as same characters.</td></tr>
+              <tr><td><strong>Western</strong></td><td>Günter Möbius</td><td><strong>Last Name:</strong> Moebius<br><strong>First Name:</strong> Guenter<br>Alt: Möbius / Günter</td><td>German and other European languages use certain special characters in certain fields.</td></tr>
+              <tr><td><strong>Filipino</strong></td><td>Lourdes Angeles</td><td><strong>Last Name:</strong> Angeles<br><strong>First Name:</strong> Lourdes</td><td>Similar to western format.</td></tr>
+              <tr><td><strong>Japanese</strong></td><td>Hiroshi Yamazaki</td><td><strong>Last Name:</strong> Yamazaki<br><strong>First Name:</strong> Hiroshi</td><td>Similar to western format.</td></tr>
+              <tr><td><strong>Thai</strong></td><td>Prachoom Pongakkarakun</td><td><strong>Last Name:</strong> Pongakkarakun<br><strong>First Name:</strong> Prachoom</td><td>Similar to western format.</td></tr>
+              <tr><td><strong>Indian</strong></td><td>Vikas Rajapal</td><td><strong>Last Name:</strong> Rajapal<br><strong>First Name:</strong> Vikas</td><td>Similar to western format.</td></tr>
+              <tr><td><strong>Indian</strong></td><td>Paramita d/o Rao</td><td><strong>Last Name:</strong> Rao<br><strong>First Name:</strong> Paramita</td><td>Omit 'd/o' or 's/o' (daughter of / son of).</td></tr>
+              <tr><td><strong>Indonesia</strong></td><td>Harianto Gunawan</td><td><strong>Last Name:</strong> Gunawan<br><strong>First Name:</strong> Harianto</td><td>Similar to western format. Many Indonesians do not have last name.</td></tr>
+              <tr><td><strong>Chinese (nationals)</strong></td><td>Chen Xiao Jun</td><td><strong>Last Name:</strong> Chen<br><strong>First Name:</strong> Xiao Jun<br>Also: Last Name: Chen Xiao Jun</td><td>Copy exactly as passport. Chinese Last Name at beginning.</td></tr>
+              <tr><td><strong>Chinese (ethnics)</strong></td><td>Cheung Hok Yau, Jacky</td><td><strong>Last Name:</strong> Cheung<br><strong>First Name:</strong> Jacky Hok Yau</td><td>English Christian name entered before Chinese given name.</td></tr>
+              <tr><td><strong>Korean</strong></td><td>Kim Woon Dai</td><td><strong>Last Name:</strong> Kim<br><strong>First Name:</strong> Woon Dai</td><td>Same as Chinese name format.</td></tr>
+              <tr><td><strong>Malay</strong></td><td>Radika Hussin Ali</td><td><strong>Last Name:</strong> Hussin Ali<br><strong>First Name:</strong> Radika</td><td>First word as First name, following as Last name.</td></tr>
+              <tr><td><strong>Malay</strong></td><td>Mira Bte Mohamed Abdullah</td><td><strong>Last Name:</strong> Mohamed Abdullah<br><strong>First Name:</strong> Mira</td><td>Omit 'bin' / 'binte' / 'bte'.</td></tr>
+              <tr><td><strong>Myanmar</strong></td><td>Aung San Moe</td><td><strong>Last Name:</strong> Aung<br><strong>First Name:</strong> San Moe</td><td>First word into Last Name, following into First Name.</td></tr>
+              <tr><td><strong>Myanmar</strong></td><td>Annie Aung Moe Win</td><td><strong>Last Name:</strong> Aung<br><strong>First Name:</strong> Annie San Moe</td><td>If Christian name given, enter into First Name field.</td></tr>
+              <tr><td><strong>Middle East (Arabic)</strong></td><td>Shadi Mohammed Ali</td><td><strong>Last Name:</strong> Mohammed Ali<br><strong>First Name:</strong> Shadi</td><td>First word as First name, following as Last name.</td></tr>
+              <tr><td><strong>Middle East (Arabic)</strong></td><td>Shadi Al Waleed</td><td><strong>Last Name:</strong> Al Waleed<br><strong>First Name:</strong> Shadi</td><td>Check with guest how name should be written.</td></tr>
+              <tr><td><strong>Middle East (Arabic)</strong></td><td>Al Waleed / Al-Waleed / Alwaleed</td><td colspan="2">Different ways to write: space, no space, or hyphen. Always follow passport.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-location-dot"></i> Address</h2>
+        <ul class="bullet-list">
+          <li><strong>Type of Address:</strong> Specify the type of address by selecting from the dropdown list if applicable. Examples: Home, Business</li>
+          <li><strong>Address with 1 line (Street Number + Directional (if applicable) + Street Name)</strong><br>Address 1 is always mandatory and must never be empty. If there is one line of address, enter it into Address Line 1.<br>Examples: 123 N Rose, 212 5th Ave</li>
+          <li><strong>Address with 2 lines (Line 1: Street Number + Directional + Street name, Line 2: Building Name + Unit number)</strong><br>If there are two lines of address, enter the primary address into Address Line 1 and the unit number into Address Line 2.<br>Examples: 16 Willow Dr Apt 205, 23 Hampton Pl, Icon Tower Ste 1210</li>
+          <li><strong>Address entry rules:</strong><br>Numbers are to be written in the numeric form e.g. 2, and not "two". All addresses will be entered in mixed upper and lower case – no periods used for abbreviations. Do not create abbreviations for the fully spelt name.</li>
+          <li><strong>Postal / Zip Code:</strong><br>This field must always be entered. If a US zip code has a zip+4, separate the first five digits from the last four digits with a hyphen.<br>Examples: 039192, 85255-1234</li>
+          <li><strong>City:</strong><br>This is used for the City / Suburb / District / Town / Village. In some countries, e.g. Australia, the name of the suburb is more important than the city for mailing purposes. Hence, the name of the suburb should be entered into this field. Do not abbreviate city names.<br>Examples: Paddington (not Sydney), Los Angeles (not LA)</li>
+          <li><strong>Country:</strong> Choose the correct country code from the list provided in Opera.</li>
+        </ul>
+      </div>
+
+      <!-- Sample Addresses -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-map"></i> Sample Addresses</h2>
+        <table class="address-table">
+          <thead><tr><th>Country</th><th>Address Line 1</th><th>Address Line 2</th><th>City</th><th>State</th><th>Zip Code</th></tr></thead>
+          <tbody>
+            <tr><td><strong>USA</strong></td><td>240 East 82 Street</td><td>Apartment 6J</td><td>New York</td><td>New York</td><td>10028-2733</td></tr>
+            <tr><td><strong>Japan</strong></td><td>1-8-22-901 Kawarayamachi</td><td>Chou-Ku</td><td>Osaka</td><td></td><td>542-0066</td></tr>
+            <tr><td><strong>Australia</strong></td><td>5 Surrey Road</td><td>Suite 64 King's Centre</td><td>Paddington</td><td>NSW</td><td>1233</td></tr>
+            <tr><td><strong>Singapore</strong></td><td>1 Temasek Avenue</td><td>Suite 05-02</td><td>Singapore</td><td></td><td>039192</td></tr>
+            <tr><td><strong>China (Common Metro)</strong></td><td>99 Xihu Road</td><td>Yuexiu District</td><td>Guangzhou</td><td>Guangdong</td><td>510030</td></tr>
+            <tr><td><strong>China (Rural)</strong></td><td>99 Guangda Road</td><td>Lianyi Village Licheng Town</td><td>Zengcheng</td><td>Guangdong</td><td>5111316</td></tr>
+            <tr><td><strong>Malaysia</strong></td><td>44 Jalan Desa Melur 4/1</td><td>Taman Bandar Connaught</td><td>Kuala Lumpur</td><td></td><td>56000</td></tr>
+            <tr><td><strong>Indonesia</strong></td><td>30 Jalan Banda</td><td></td><td>Bandung</td><td></td><td>40115</td></tr>
+            <tr><td><strong>Thailand</strong></td><td>111 Chaengwatthana Road</td><td>Laksi</td><td>Bangkok</td><td></td><td>10210-0299</td></tr>
+            <tr><td><strong>Vietnam</strong></td><td>123/45 Thien Quang</td><td>Hai Ba Trung</td><td>Hanoi</td><td></td><td> 电子
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Business / Company -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-building"></i> Business / Company</h2>
+        <table class="data-table">
+          <thead><tr><th>RULE</th><th>EXAMPLE</th></tr></thead>
+          <tbody>
+            <tr><td>Company Suffix: suffixes such as Co. Inc, Corp are not considered part of the company name and should not be used unless it is part of the actual company name – if used, do not abbreviate</td><td>Texaco Inc. → Texaco, Boston Edison Co → Boston Edison, Bain and Company, Boston Company</td></tr>
+            <tr><td>Do not use the ampersand (&) symbol, type out conjunctions in full</td><td>Proctor and Gamble, Johnson and Johnson</td></tr>
+            <tr><td>If a company name has more than two names, type without punctuation</td><td>Sears Roebuck and Company, Foley Hoag and Eliot</td></tr>
+            <tr><td>If a company name contains initials, type without punctuation and without spaces</td><td>IBM, EF Hutton</td></tr>
+            <tr><td>Unless a number in a company name is formally numeric, it should be spelled out</td><td>First National Bank, Saks Fifth Avenue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Phone Numbers - WITH BULLET POINTS ON EACH EXAMPLE -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-phone"></i> Phone Numbers</h2>
+        <ul class="bullet-list">
+          <li>All telephone, fax and mobile numbers must have the country and area code regardless of local or International number. Example: +12121234567</li>
+          <li>Do not leave any spaces between the country code, area code and the number block. There should not be any "( )" for the area code and spaces or hyphen -, / for the telephone number block. This is to ensure consistency even if the mobile number is not from your country and you are not able to identify the prefix number.<br><br>Examples:
+            <br>• +842412345678 (Vietnam)
+            <br>• +6621234567 (Thailand)
+            <br>• +6512345678 (Singapore)
+            <br>• +623612091888 (Indonesia)
+            <br>• +8613910998888 (China)
+            <br>• +12121234567 (USA)</li>
+          <li>Some countries have a leading zero in front of the area code. It is required to include this zero when dialling the number.<br><br>Example:
+            <br>• +390277037734 (Milan, Italy)</li>
+          <li><strong>NOTE:</strong> A minimum of 7 digits is required in the string for all telephone, fax and mobile phone numbers for interface with GHA and Cendyn. Numbers with less than 7 digits will be rejected during upload and then deleted locally as a result.</li>
+          <li><strong>INCORRECT!</strong><br><br>Examples:
+            <br>• 1 (212) 1234567
+            <br>• 0049 (30) 2261-0
+            <br>• 97156</li>
+        </ul>
+      </div>
+
+      <!-- Email -->
+      <div class="section-card">
+        <h2><i class="fa-regular fa-envelope"></i> Email</h2>
+        <ul class="bullet-list">
+          <li>A typical e-mail address has no spacing and is entirely in lower case. There is sometimes a combination of letters and numbers.</li>
+          <li>Examples:
+            <br>• franksmith@company.com
+            <br>• jacky1971@gmx.net
+            <br>• mike_fandango@yahoo.com
+            <br>• mike.fandango@gha.com</li>
+        </ul>
+      </div>
+
+      <!-- Membership Numbers - WITH BULLET POINTS ON EXAMPLES -->
+      <div class="section-card">
+        <h2><i class="fa-solid fa-id-card"></i> Membership Numbers</h2>
+        <ul class="bullet-list">
+          <li><strong>DISCOVERY</strong> membership numbers are numeric, 10 digits in length and are entered without blanks. A DISCOVERY membership number can only be assigned to one individual profile.<br><br>Example:
+            <br>• 8671983522</li>
+          <li><strong>LHW Leaders Club</strong> membership numbers are from 5 to 7 digits, no spaces, all numbers.</li>
+          <li><strong>INCORRECT!</strong> blank spaces, too many digits.<br><br>Example:
+            <br>• 1362 9036 874</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <div class="footer-brand"><span class="footer-logo-icon"><img src="logo/bintang-capella.png" alt="star"></span><span class="footer-logo-text">CHG <em>Reservations</em> Standards</span></div>
+      <p class="footer-property">Capella Ubud, Bali</p>
+      <p class="footer-note">Internal Use Only — Authorized Personnel</p>
+      <p class="footer-copy">&copy; 2025 Capella Hotel Group. All rights reserved.</p>
+    </div></div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => { const navbar = document.getElementById('navbar'); if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 20); });
+    document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => document.getElementById('navMenu')?.classList.remove('open')); });
+  </script>
+</body>
+</html>
